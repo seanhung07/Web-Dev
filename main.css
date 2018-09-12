@@ -1,0 +1,40 @@
+body{
+  margin: 0;
+  padding: 0;
+}
+
+header{
+  position: fixed;
+  background-color: white;
+  width: 100%;
+}
+
+table{
+  border-spacing: 0;
+}
+
+#nav{
+  position: fixed;
+  background: #ff3232;
+  width: 100%;
+  height: 3%;
+  margin: 0;
+}
+
+.navelement{
+  width: 33%;
+  transition: .2s;
+  text-align: center;
+}
+
+.navelement:hover{
+  background-color: #ffe8e8;
+}
+
+#logo{
+  text-align: center;
+}
+
+#content{
+  padding: 10% 20% 0 20%;
+}
