@@ -14,7 +14,7 @@ class User{
 
 }
 
-class order{
+class Order{
   private $Oid;
 
   private $food = array();

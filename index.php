@@ -1,63 +1,92 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!--10s0u0kllllaFw0g0qFqFg0w0aF-->
     <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>pizza</title>
+    <script>
+      //fixed header
+      function get(){
+        if($('#logo').offset().top - $(window).scrollTop() < -210 && $("#logo2").css("opacity")==0){
+          $("#logo2").css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1.0});
+        }else if($('#logo').offset().top - $(window).scrollTop() >= -210 && $("#logo2").css("opacity")>0){
+          $("#logo2").css({opacity: 1.0, visibility: "visibility"}).animate({opacity: 0.0});
+        }
+
+      }
+      window.setInterval(get, 400);
+
+      //load htmls
+      function setAbout(){
+        $("#content").load("about.php", function(){
+          select("navabout");
+        });
+      }
+      function setMenu(){
+        $("#content").load("menu.php", function(){
+          select("navmenu");
+        });
+      }
+      function setDelivery(){
+        $("#content").load("delivery.php", function(){
+          select("navdelivery");
+        });
+      }
+      function select(id){
+        $("#navabout").attr('class', 'navelement');
+        $("#navmenu").attr('class', 'navelement');
+        $("#navdelivery").attr('class', 'navelement');
+        $("#".concat(id)).attr('class', 'navelement navselected');
+        $('html, body').animate({
+          scrollTop: $("#nav").offset().top-70
+        }, 800);
+      }
+
+    </script>
   </head>
 
-  <header>
-    <a href="./">
-      <h1 id="logo">pizza</h1>
-    </a>
-    <table id="nav">
-      <tr>
-        <th class="navelement">About Us</th>
-        <th class="navelement">Menu</th>
-        <th class="navelement">Deliver</th>
-      </tr>
-    </table>
-  </header>
-
   <body>
-    <div id="content">
-      <div id="myCarousel" class="c carousel slide" data-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-          <li data-target="#myCarousel" data-slide-to="1"></li>
-          <li data-target="#myCarousel" data-slide-to="2"></li>
-        </ol>
+    <div id="top"></div>
 
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner">
-          <div class="item active">
-            <img src="img/pizza1.jpg" alt="Los Angeles">
-          </div>
-
-          <div class="item">
-            <img src="img/pizza2.jpg" alt="Chicago">
-          </div>
-
-          <div class="item">
-            <img src="img/pizza3.jpg" alt="New York">
-          </div>
+    <div id="logo2">
+      <a href="#top">
+        <div id="logoname2">
+          PIZZA
         </div>
+      </a>
+    </div>
+    <script>
+    //smooth scrolling
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
 
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+      });
+    </script>
 
-
-        <!-- Left and right controls -->
-        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-          <span class="glyphicon glyphicon-chevron-left"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#myCarousel" data-slide="next">
-          <span class="glyphicon glyphicon-chevron-right"></span>
-          <span class="sr-only">Next</span>
-        </a>
+    <div id="logo">
+      <div id="logoname">
+        PIZZA
       </div>
     </div>
+
+    <div id="nav">
+        <div id="navabout" class="navelement" onclick="setAbout()">About Us</div>
+        <div id="navmenu" class="navelement" onclick="setMenu()">Menu</div>
+        <div id="navdelivery" class="navelement" onclick="setDelivery()">Delivery</div>
+    </div>
+    <script>
+    </script>
+
+    <div id="content">
+
+    </div>
+
   </body>
 </html>
