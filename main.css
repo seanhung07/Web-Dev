@@ -1,0 +1,149 @@
+*{
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+body{
+  background-image: url("img/pizzabg.jpg");
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+}
+
+#background img{
+  margin: 0;
+  padding: 0;
+  position: fixed;
+}
+
+#account{
+  position: fixed;
+  z-index: 300;
+  width: 100%;
+  top: 0;
+}
+
+#account .accountelement{
+  color: white;
+  width: 4%;
+  float: right;
+  text-align: right;
+  margin-right: 2%;
+  font-size: 120%;
+}
+
+#logo{
+  position: relative;
+  background-color: black;
+  z-index: 100;
+  width: 50%;
+  height: 40vh;
+  margin-top: 12.5%;
+  margin-left: 25%;
+  border: 0.5vh solid white;
+  border-bottom: 0px;
+  display: table;
+}
+
+#logo2{
+  position: fixed;
+  background-color: black;
+  width: 100%;
+  top: 0;
+  z-index: 200;
+  opacity: 0;
+  visibility: hidden;
+}
+
+#logoname2{
+  text-align: center;
+  font-size: 300%;
+  color: white;
+}
+
+#logo a{
+  text-align: center;
+  color: white;
+  vertical-align: middle;
+  display: table-cell;
+  font-size: 300%;
+}
+
+#nav{
+  position: relative;
+  background-color: black;
+  z-index: 100;
+  width: 50%;
+  height: 5vh;
+  margin-top: 0;
+  margin-left: 25%;
+  display: table;
+  border: 0.5vh solid white;
+  border-top: 0;
+  border-bottom: 0;
+}
+
+.navelement{
+  text-align: center;
+  color: white;
+  vertical-align: middle;
+  display: table-cell;
+  font-size: 150%;
+  transition: .2s;
+  width: 33%;
+  border-bottom: 0.5vh solid white;
+}
+
+.navelement:hover{
+  background-color: #B6B6B7;
+  border-bottom: 0.5vh solid #777777;
+}
+
+.navselected{
+  background-color: #B6B6B7;
+  border-bottom: 0.5vh solid #777777;
+}
+
+a{
+  text-decoration: none !important;
+}
+
+#menu{
+  width: 100%;
+}
+
+#menu td{
+  width: 33%;
+}
+
+.menuitem{
+  text-align: center;
+  background-color: #E7E7E7;
+  margin:10%;
+  padding: 5%;
+}
+
+.menuitem img{
+  text-align: center;
+  width: 95%;
+  margin: auto;
+  border: 5px solid black;
+}
+
+#mapcontainer{
+  width:90%;
+  height: 600px;
+  margin: 5%;
+  background-color: #E7E7E7;
+}
+
+#map{
+  width:600px;
+  height:600px;
+  background:#B6B6B7;
+  float: left;
+}
+
+.info{
+  padding-top: 10px;
+  margin-left: 625px;
+}
