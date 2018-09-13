@@ -1,3 +1,10 @@
+<?php
+  ini_set('display_errors', 1);
+  ini_set('displat_startup_errors', 1);
+  error_reporting(E_ALL);
+  session_start();
+  include("classes.php");
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -69,7 +76,16 @@
         });
       });
     </script>
-
+    <div id="account" >
+      <a href="./">
+        <div class="accountelement">
+          Login
+        </div>
+        <div class="accountelement">
+          Register
+        </div>
+      </a>
+    </div>
     <div id="logo">
       <div id="logoname">
         PIZZA

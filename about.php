@@ -1,7 +1,10 @@
 <div id="mapcontainer">
   <div id="map"></div>
-  <div class="info">Location: </div>
-  <div class="info">Location: </div>
+  <div class="info"><strong>Location: </strong>n/a</div>
+  <div class="info"><strong>Phone: </strong>0987654321</div>
+  <div class="info"><strong>Open: </strong>9:00am</div>
+  <div class="info"><strong>Close: </strong>12:00pm</div>
+
 </div>
 
 <script>
@@ -27,7 +30,7 @@
   function showError(){
 
   }
-  
+
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAa6Ly7B_jOG4p6r9uK1Aw4je5BWnoqPtY&callback=getLocation"></script>

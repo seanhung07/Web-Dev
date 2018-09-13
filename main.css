@@ -15,6 +15,22 @@ body{
   position: fixed;
 }
 
+#account{
+  position: fixed;
+  z-index: 300;
+  width: 100%;
+  top: 0;
+}
+
+#account .accountelement{
+  color: white;
+  width: 3%;
+  float: right;
+  text-align: right;
+  margin-right: 2%;
+  font-size: 120%;
+}
+
 #logo{
   position: relative;
   background-color: black;
