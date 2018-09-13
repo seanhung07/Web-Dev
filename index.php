@@ -50,7 +50,9 @@
           scrollTop: $("#nav").offset().top-70
         }, 800);
       }
+      function deselect(){
 
+      }
     </script>
   </head>
 
@@ -78,18 +80,28 @@
     </script>
     <div id="account" >
       <a href="./">
-        <div class="accountelement">
-          Login
-        </div>
-        <div class="accountelement">
-          Register
-        </div>
+        <?php
+          if(empty($_SESSION["user"])){
+            echo "<div class=\"accountelement\">
+              Login
+            </div>
+            <div class=\"accountelement\">
+              Register
+            </div>";
+          }else{
+            echo "<div class=\"accountelement\">
+            Log out
+            </div>";
+          }
+        ?>
       </a>
     </div>
     <div id="logo">
-      <div id="logoname">
-        PIZZA
-      </div>
+      <a href="./">
+        <div id="logoname">
+          PIZZA
+        </div>
+      </a>
     </div>
 
     <div id="nav">

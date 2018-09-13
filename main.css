@@ -24,7 +24,7 @@ body{
 
 #account .accountelement{
   color: white;
-  width: 3%;
+  width: 4%;
   float: right;
   text-align: right;
   margin-right: 2%;
@@ -60,7 +60,7 @@ body{
   color: white;
 }
 
-#logoname{
+#logo a{
   text-align: center;
   color: white;
   vertical-align: middle;
