@@ -2,14 +2,14 @@
 class User{
   private $username;
 
-  private $orders = array();
+  private $orders;
 
   function __construct($username){
     $this->username = $username;
   }
 
-  function addOrder($order){
-    array_push($this->orders, $order);
+  function setOrder($order){
+    $this->order=$order;
   }
 
 }
@@ -76,8 +76,8 @@ class Database{
 	}
 
 	//user
-	function addUser($username, $password, $address){
-		$this->conn->query("INSERT INTO user(username, password, address) VALUES('$username', '$password', '$address');");
+	function addUser($username, $password, $address, $FName, $LName){
+		$this->conn->query("INSERT INTO user(username, password, address, FName, LName) VALUES('$username', '$password', '$address', '$FName', '$LName');");
 	}
 	function userExists($username){
 		return $this->conn->query("SELECT username FROM user WHERE username='$username';")->num_rows != 0;

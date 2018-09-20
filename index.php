@@ -11,7 +11,9 @@
     <!--10s0u0kllllaFw0g0qFqFg0w0aF-->
     <link rel="stylesheet" href="css/main.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
     <title>pizza</title>
     <script>
       //fixed header
@@ -50,10 +52,141 @@
           scrollTop: $("#nav").offset().top-70
         }, 800);
       }
-      function deselect(){
 
+      //account
+      function logout(){
+        if(sessionStorage.getItem("user")){
+          sessionStorage.removeItem("user");
+          document.getElementById("account").innerHTML="<div id=\"login\" class=\"accountelement\">Login</div>";
+          document.getElementById("account").innerHTML+="<div id=\"register\" class=\"accountelement\">Register</div>";
+          document.querySelector("#login").addEventListener("click", login);
+          document.querySelector("#register").addEventListener("click", register);
+        }
       }
+      function login(){
+        swal({
+          title: "login",
+          html:
+            "username:<input id=\"username\" class=\"swal2-input\">" +
+            "password:<input id=\"password\" type=\"password\" class=\"swal2-input\">",
+          showCloseButton: true,
+          focusConfirm: false,
+          preConfirm: function(){
+            return new Promise(function(resolve){
+              resolve([
+                $("#username").val(),
+                $("#password").val()
+              ]);
+            });
+          },
+          allowOutsideClick: false,
+          confirmButtonColor: "#000"
+        }).then(function(result){
+          $.ajax({
+            type: "POST",
+            url: "login.php",
+            data: {
+              "username":result["value"][0],
+              "password":result["value"][1]
+            },
+            cashe: false,
+            success: function(response){
+              if(!response["valid"]){
+                swal({
+                  title: "Invalid username and password combination",
+                  confirmButtonColor: "#000"
+                }).then(login);
+              }else{
+                swal({
+                  title: "Welcome! "+result["value"][0],
+                  confirmButtonColor: "#000"
+                }).then(function(){
+                  sessionStorage.setItem("user", result["value"][0]);
+                  document.getElementById("account").innerHTML="<div id=\"logout\" class=\"accountelement\">Log out</div>";
+                  document.querySelector("#logout").addEventListener("click", logout);
+                });
+              }
+            },
+            failure: function(response){
+              swal("login failed")
+            }
+          })
+        }).catch(swal.noop);
+      }
+
+      function register(){
+        swal({
+          title: "register",
+          html:
+            "username:<input id=\"username\" class=\"swal2-input\">" +
+            "password:<input id=\"password\" type=\"password\" class=\"swal2-input\">" +
+            "address:<input id=\"address\" class=\"swal2-input\">" +
+            "first name:<input id=\"FName\" class=\"swal2-input\">" +
+            "last name:<input id=\"LName\" class=\"swal2-input\">",
+          showCloseButton: true,
+          focusConfirm: false,
+          preConfirm: function(){
+            return new Promise(function(resolve){
+              resolve([
+                $("#username").val(),
+                $("#password").val(),
+                $("#address").val(),
+                $("#FName").val(),
+                $("#LName").val()
+              ]);
+            });
+          },
+          allowOutsideClick: false,
+          confirmButtonColor: "#000"
+        }).then(function(result){
+          $.ajax({
+            type: "POST",
+            url: "register.php",
+            data: {
+              "username":result["value"][0],
+              "password":result["value"][1],
+              "address":result["value"][2],
+              "FName":result["value"][3],
+              "LName":result["value"][4]
+            },
+            cashe: false,
+            success: function(response){
+              if(!response["valid"]){
+                swal({
+                  title: "username already exists",
+                  confirmButtonColor: "#000"
+                }).then(register);
+              }else{
+                swal({
+                  title: "Welcome! "+result["value"][0],
+                  confirmButtonColor: "#000"
+                }).then(function(){
+                  sessionStorage.setItem("user", result["value"][0]);
+                  document.getElementById("account").innerHTML="<div id=\"logout\" class=\"accountelement\">Log out</div>";
+                  document.querySelector("#logout").addEventListener("click", logout);
+                });
+              }
+            },
+            failure: function(response){
+              swal("fail")
+            }
+          })
+        }).catch(swal.noop);
+      }
+      $(document).ready(function(){
+        if(sessionStorage.getItem("username")){
+          document.getElementById("account").innerHTML="<div id=\"logout\" class=\"accountelement\">Log out</div>";
+          document.querySelector("#logout").addEventListener("click", logout);
+        }else{
+          document.getElementById("account").innerHTML="<div id=\"login\" class=\"accountelement\">Login</div>";
+          document.getElementById("account").innerHTML+="<div id=\"register\" class=\"accountelement\">Register</div>";
+          document.querySelector("#login").addEventListener("click", login);
+          document.querySelector("#register").addEventListener("click", register);
+        }
+
+      });
     </script>
+
   </head>
 
   <body>
@@ -78,24 +211,10 @@
         });
       });
     </script>
+
     <div id="account" >
-      <a href="./">
-        <?php
-          if(empty($_SESSION["user"])){
-            echo "<div class=\"accountelement\">
-              Login
-            </div>
-            <div class=\"accountelement\">
-              Register
-            </div>";
-          }else{
-            echo "<div class=\"accountelement\">
-            Log out
-            </div>";
-          }
-        ?>
-      </a>
     </div>
+
     <div id="logo">
       <a href="./">
         <div id="logoname">
