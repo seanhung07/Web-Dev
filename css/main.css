@@ -192,6 +192,11 @@ a {
   cursor: pointer;
 }
 
+.selectoption{
+  width: 50%;
+  border-radius: 5%;
+}
+
 .myButton {
     -moz-box-shadow: 0px 0px 0px 2px #9fb4f2;
     -webkit-box-shadow: 0px 0px 0px 2px #9fb4f2;

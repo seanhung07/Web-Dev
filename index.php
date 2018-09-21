@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/main.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
     <title>pizza</title>
@@ -70,6 +71,8 @@
             "username:<input id=\"username\" class=\"swal2-input\">" +
             "password:<input id=\"password\" type=\"password\" class=\"swal2-input\">",
           showCloseButton: true,
+          showCancelButton: true,
+          cancelButtonText: "register",
           focusConfirm: false,
           preConfirm: function(){
             return new Promise(function(resolve){
@@ -82,6 +85,10 @@
           allowOutsideClick: false,
           confirmButtonColor: "#000"
         }).then(function(result){
+          if(result.dismiss==='cancel'){
+            swal.close();
+            register();
+          }
           $.ajax({
             type: "POST",
             url: "login.php",
@@ -173,8 +180,8 @@
           })
         }).catch(swal.noop);
       }
-      $(document).ready(function(){
-        if(sessionStorage.getItem("username")){
+      window.onload = function(){
+        if(sessionStorage.getItem("user")){
           document.getElementById("account").innerHTML="<div id=\"logout\" class=\"accountelement\">Log out</div>";
           document.querySelector("#logout").addEventListener("click", logout);
         }else{
@@ -184,7 +191,7 @@
           document.querySelector("#register").addEventListener("click", register);
         }
 
-      });
+      };
     </script>
 
   </head>
