@@ -156,6 +156,7 @@ a {
   width: 70%;
   margin: 15%;
   margin-top: 5%;
+  margin-bottom: 2%;
   background-color: #E7E7E7;
 }
 
@@ -195,6 +196,28 @@ a {
 .selectoption{
   width: 50%;
   border-radius: 5%;
+}
+
+#checkout{
+  display: inline-block;
+  width: 10%;
+  background-color: black;
+  height: 5vh;
+  float: right;
+  margin-right: 15%;
+  margin-bottom: 10%;
+  border: 5px solid white;
+  cursor: pointer;
+}
+
+#checkouttext{
+  color: white;
+  text-align: center;
+  margin-top: 8%;
+}
+
+#checkouttext:hover{
+  transform: scale(1.5);
 }
 
 .myButton {
