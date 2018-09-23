@@ -43,7 +43,6 @@
                 arr.push([path,result["value"][0]]);
               }
               sessionStorage.setItem("order", JSON.stringify(arr));
-              console.log(arr);
             }else{
               sessionStorage.setItem("order", JSON.stringify([[path,result["value"][0]]]));
             }

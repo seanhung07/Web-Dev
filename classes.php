@@ -19,8 +19,9 @@ class Order{
 
   private $food = array();
 
-  function __construct($Oid){
-    $this->Oid = $Oid;
+  function __construct($username){
+    $db = new Database();
+    $this->Oid = $db->addOrder($username);
   }
 
   function addFood($name){
@@ -34,12 +35,17 @@ class Order{
     return True;
   }
 
-  function addToDb(){
-    $db = new Databse();
-    foreach($food as $key=>$value){
-      $db->getConn->query("INSERT INTO food(Oid, name, amount) VALUES('$this->Oid', '$key', '$amount');");
-    }
+  function setFood($foodarr){
+    $this->food=$foodarr;
+  }
 
+  function addToDb(){
+    $db = new Database();
+    foreach($this->food as $row){
+      $key = $row[0];
+      $amount = $row[1];
+      $db->getConn()->query("INSERT INTO food(Oid, name, amount) VALUES('$this->Oid', '$key', '$amount');");
+    }
   }
 
   function getOid(){
@@ -98,6 +104,7 @@ class Database{
   //order
   function addOrder($username){
     $this->conn->query("INSERT INTO foodorder(username) VALUES('$username');");
+    return $this->conn->insert_id;
   }
   function getOrders($username){
     $result = $this->conn->query("SELECT Oid FROM foodorder WHERE username='$username'");
