@@ -1,4 +1,6 @@
 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3pro.css">
 <script>
   function popup(path){
     var name=path.split(".")[0];
@@ -67,7 +69,7 @@
       for($j=0; $j<min(3,count($items)-$i*3-$j-2); $j++){
         $path=$items[$i*3+$j+2];
         $name=explode(".", $path)[0];
-        echo "<td><div class=\"menuitem\"  onclick=popup(\"" . $path . "\")><img src=\"img/menu/" . $path . "\"/>" . $name . "</div></td>";
+        echo "<td><div class=\"menuitem\"  onclick=popup(\"" . $path . "\")><img src=\"img/menu/" . $path . "\"/>" . $name  . "</div></td>";
       }
       echo "</tr>";
     }
