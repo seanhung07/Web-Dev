@@ -16,6 +16,14 @@
         "<i  onclick=\"edititem(\'" + arr[i][0] + "\')\" class=\"edit far fa-edit\"/>" +
       "</div>";
     }
+    if(arr.length==0){
+      document.getElementById("deliverycontainer").innerHTML =
+      "<div class=\"deliveryitem\">" +
+      "<div class=\"deliveryname\" style=\"margin-left:45%;\">" +
+      "Your order is empty" +
+      "</div>" +
+      "</div>";
+    }
   }
   function deleteitem(path){
     arr = JSON.parse(sessionStorage.getItem("order"));

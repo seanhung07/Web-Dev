@@ -149,7 +149,9 @@ a {
 .info {
     padding-top: 10px;
     margin-left: 625px;
+    font-size: 500em;
 }
+
 
 #deliverycontainer{
   display: inline-block;

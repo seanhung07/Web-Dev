@@ -66,7 +66,7 @@
       for($j=0; $j<min(3,count($items)-$i*3-$j-2); $j++){
         $path=$items[$i*3+$j+2];
         $name=explode(".", $path)[0];
-        echo "<td><div class=\"menuitem\"  onclick=popup(\"" . $path . "\")><img src=\"img/menu/" . $path . "\"/>" . $name . "</div></td>";
+        echo "<td><div class=\"menuitem\"  style=\"font-size:200%\"  onclick=popup(\"" . $path . "\")><img src=\"img/menu/" . $path . "\"/>" . $name . "</div></td>";
       }
       echo "</tr>";
     }
