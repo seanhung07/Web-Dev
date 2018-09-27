@@ -8,6 +8,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta name="viewport" content="user-scalable=no">
     <!--10s0u0kllllaFw0g0qFqFg0w0aF-->
     <link rel="stylesheet" href="css/main.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
@@ -17,8 +18,11 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
     <title>pizza</title>
     <script>
+      document.addEventListener('gesturestart', function (e) {
+          e.preventDefault();
+      });
       //fixed header
-      function get(){
+      function logocontrol(){
         if($('#logo').offset().top - $(window).scrollTop() < -210 && $("#logo2").css("opacity")==0){
           $("#logo2").css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1.0});
         }else if($('#logo').offset().top - $(window).scrollTop() >= -210 && $("#logo2").css("opacity")>0){
@@ -26,7 +30,11 @@
         }
 
       }
-      window.setInterval(get, 400);
+      if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+      }else{
+        window.setInterval(logocontrol, 400);
+      }
+
 
       //load htmls
       function setAbout(){
@@ -49,9 +57,12 @@
         $("#navmenu").attr('class', 'navelement');
         $("#navdelivery").attr('class', 'navelement');
         $("#".concat(id)).attr('class', 'navelement navselected');
-        $('html, body').animate({
-          scrollTop: $("#nav").offset().top-70
-        }, 800);
+        if( !(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))) {
+          $('html, body').animate({
+            scrollTop: $("#nav").offset().top-70
+          }, 800);
+        }
+
       }
 
       //account
@@ -146,38 +157,45 @@
           allowOutsideClick: false,
           confirmButtonColor: "#000"
         }).then(function(result){
-          $.ajax({
-            type: "POST",
-            url: "register.php",
-            data: {
-              "username":result["value"][0],
-              "password":result["value"][1],
-              "address":result["value"][2],
-              "FName":result["value"][3],
-              "LName":result["value"][4]
-            },
-            cashe: false,
-            success: function(response){
-              if(!response["valid"]){
-                swal({
-                  title: "username already exists",
-                  confirmButtonColor: "#000"
-                }).then(register);
-              }else{
-                swal({
-                  title: "Welcome! "+result["value"][0],
-                  confirmButtonColor: "#000"
-                }).then(function(){
-                  sessionStorage.setItem("user", result["value"][0]);
-                  document.getElementById("account").innerHTML="<div id=\"logout\" class=\"accountelement\">Log out</div>";
-                  document.querySelector("#logout").addEventListener("click", logout);
-                });
+          if(result["value"][0].trim()==""||result["value"][1].trim()==""){
+            swal({
+              title: "username and password cannot be blank",
+              confirmButtonColor: "#000"
+            }).then(register);
+          }else{
+            $.ajax({
+              type: "POST",
+              url: "register.php",
+              data: {
+                "username":result["value"][0],
+                "password":result["value"][1],
+                "address":result["value"][2],
+                "FName":result["value"][3],
+                "LName":result["value"][4]
+              },
+              cashe: false,
+              success: function(response){
+                if(!response["valid"]){
+                  swal({
+                    title: "username already exists",
+                    confirmButtonColor: "#000"
+                  }).then(register);
+                }else{
+                  swal({
+                    title: "Welcome! "+result["value"][0],
+                    confirmButtonColor: "#000"
+                  }).then(function(){
+                    sessionStorage.setItem("user", result["value"][0]);
+                    document.getElementById("account").innerHTML="<div id=\"logout\" class=\"accountelement\">Log out</div>";
+                    document.querySelector("#logout").addEventListener("click", logout);
+                  });
+                }
+              },
+              failure: function(response){
+                swal("fail")
               }
-            },
-            failure: function(response){
-              swal("fail")
-            }
-          })
+            })
+          }
         }).catch(swal.noop);
       }
       window.onload = function(){
@@ -198,9 +216,11 @@
 
   <body>
     <div id="top"></div>
-
+    <div id="mobiletopbar">
+    </div>
     <div id="logo2">
       <a href="#top">
+
         <div id="logoname2">
           PIZZA
         </div>
